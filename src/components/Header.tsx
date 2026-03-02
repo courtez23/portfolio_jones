@@ -8,7 +8,7 @@ export default function Header() {
           {/* Logo */}
           <Link 
             to="/" 
-            className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:from-cyan-300 hover:to-blue-400 transition-all"
+            className="text-xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:from-cyan-300 hover:to-blue-400 transition-all"
           >
             Courtez Jones
           </Link>

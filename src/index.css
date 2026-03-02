@@ -190,3 +190,18 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+/* Hero Section — derived from theme variables */
+:root {
+  --hero-accent: oklch(0.7 0.15 200);
+  --hero-node: var(--primary);
+  --hero-line: oklch(0.5 0.1 180 / 0.25);
+  --hero-glow: var(--primary);
+}
+
+.dark {
+  --hero-accent: oklch(0.75 0.14 195);
+  --hero-node: var(--primary);
+  --hero-line: oklch(0.55 0.1 180 / 0.2);
+  --hero-glow: var(--primary);
+}

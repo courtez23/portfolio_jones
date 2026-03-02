@@ -83,3 +83,37 @@ export const titleCinematicAnimation = {
     staggerChildren: 0.05,
   }
 }
+
+// ——————————————————————————————————————
+// Hero-specific animation presets
+// ——————————————————————————————————————
+
+/** Staggered character reveal (used by StaggeredText) */
+export const heroCharVariants = {
+  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+}
+
+/** Hero content fade-out on deep scroll */
+export const heroFadeOutRange = {
+  input: [0, 0.85, 1],
+  output: [1, 1, 0],
+}
+
+/** Node entrance animation */
+export const heroNodeEntrance = {
+  initial: { scale: 0, opacity: 0 },
+  animate: { scale: 1 },
+  transition: { duration: 1.2, ease: 'easeOut' },
+}
+
+/** Scroll indicator bounce */
+export const scrollIndicatorBounce = {
+  animate: { y: [0, 8, 0] },
+  transition: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
+}
