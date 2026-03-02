@@ -203,7 +203,7 @@ export default function AboutSection() {
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
             From disassembling Xbox CD drives out of curiosity to rebuilding
-            statewide infrastructure after ransomware—every chapter built on the
+            statewide infrastructure. Every chapter built on the
             last.
           </p>
         </motion.div>
