@@ -17,7 +17,6 @@ import {
  *
  * Animated vertical timeline: apprenticeship → contractor → infrastructure → present
  * Each milestone enters with staggered animation on scroll.
- * Connects: Curiosity → Discipline → Enterprise Responsibility → Long-Term Thinking
  */
 
 interface TimelineMilestone {
@@ -30,15 +29,15 @@ interface TimelineMilestone {
 
 const milestones: TimelineMilestone[] = [
   {
-    year: '2017–2019',
+    year: '2017-2019',
     title: 'Foundation & Community',
     description:
-      'Started in a college-affiliated apprenticeship building full-stack applications for local organizations—while introducing elementary students to programming. Real-world execution met community impact from day one.',
+      'Started in a college-affiliated apprenticeship building full-stack applications for local organizations and introducing elementary students to programming. Real-world execution met community impact from day one.',
     icon: <Code2 className="w-5 h-5" />,
     accent: 'from-emerald-400 to-cyan-400',
   },
   {
-    year: '2019–2023',
+    year: '2019-2023',
     title: 'Enterprise & Leadership',
     description:
       'Lead Software Engineer and government contractor supporting statewide enterprise applications. Led front-end initiatives, designed database schemas, built CI/CD pipelines, onboarded developers, and served as the escalation point for production incidents across systems over a decade old.',
@@ -46,10 +45,10 @@ const milestones: TimelineMilestone[] = [
     accent: 'from-cyan-400 to-blue-500',
   },
   {
-    year: '2024',
-    title: 'Infrastructure Recovery',
+    year: '2024-2025',
+    title: 'Infrastructure Security',
     description:
-      'Rebuilt internal infrastructure after a ransomware incident. Modernized server environments, improved operational reliability, and strengthened security posture—earning CompTIA Network+ and Security+ certifications along the way.',
+      'Rebuilt the internal infrastructure for a medium-sized company after they experienced a ransomware incident. Modernized server environments, improved operational reliability, and strengthened security posture.',
     icon: <Shield className="w-5 h-5" />,
     accent: 'from-blue-500 to-violet-500',
   },
@@ -57,7 +56,7 @@ const milestones: TimelineMilestone[] = [
     year: '2025–Present',
     title: 'Building What Lasts',
     description:
-      'Channeling eight years of enterprise depth, security literacy, and systems thinking into architecture that endures. Building scalable platforms, extracting reusable frameworks, and pursuing engineering that strengthens communities.',
+      'Channeling eight years of enterprise depth, security literacy, and systems thinking into architecture that endures. Building scalable platforms and pursuing tools that strengthen communities.',
     icon: <Rocket className="w-5 h-5" />,
     accent: 'from-violet-500 to-emerald-400',
   },
@@ -81,9 +80,8 @@ function TimelineNode({
     >
       {/* Left content (even items) or spacer (odd items) */}
       <div
-        className={`${isLeft ? 'text-right' : ''} ${
-          isLeft ? 'block' : 'hidden md:block'
-        }`}
+        className={`${isLeft ? 'text-right' : ''} ${isLeft ? 'block' : 'hidden md:block'
+          }`}
       >
         {isLeft && (
           <motion.div
@@ -238,15 +236,15 @@ export default function AboutSection() {
           viewport={{ once: true }}
           className="mt-20 max-w-3xl mx-auto text-center space-y-6"
         >
-          <p className="text-slate-300 leading-relaxed text-base md:text-lg">
-            Outside of engineering, I'm a father, a fitness enthusiast, and someone who
-            grew up watching <span className="text-emerald-400 font-medium">Death Note</span> and{' '}
-            <span className="text-cyan-400 font-medium">Naruto</span>—drawn to stories about
+          <h3 className='text-xl md:text-2xl font-bold text-slate-100'>Outside of work</h3>
+          <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+            I'm a father, a fitness enthusiast, and someone who
+            grew up watching <span className="text-blue-400 font-medium">Dragon Ball</span> and <span className="text-orange-500 font-medium">Naruto</span>. I've always been drawn to stories about
             strategic thinking, relentless growth, and the will to protect what matters.
           </p>
           <p className="text-slate-400 leading-relaxed text-sm md:text-base">
-            That same curiosity that had me fixing consoles at twelve still drives me today.
-            Technology should strengthen communities, advance equality, and scale responsibly.
+            The same curiosity that had me fixing consoles at twelve still drives me today.
+            I believe technology should strengthen communities, advance equality, and scale responsibly.
           </p>
         </motion.div>
       </div>
