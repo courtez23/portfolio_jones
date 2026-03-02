@@ -105,7 +105,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'CompTIA Security+', level: 4, context: 'Certified - threat analysis, risk management' },
       { name: 'CompTIA Network+', level: 4, context: 'Certified - network architecture, troubleshooting' },
-      { name: 'OAuth / Auth Security', level: 4, context: "Enterprise authentication - OAuth, OpenID Connect, ID.me" },
+      { name: 'OAuth / Auth Security', level: 5, context: "Enterprise authentication - OAuth, OpenID Connect, ID.me" },
       { name: 'Infrastructure Hardening', level: 4, context: 'Server security best practices - patching, access controls, monitoring' },
     ],
   },
@@ -248,8 +248,7 @@ export default function SkillsSection() {
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Tools used in real systems—not listed casually, but framed by the enterprise,
-            government, and infrastructure challenges they solved.
+            An overview of my technical expertise. Each skill includes a proficiency level and real-world context to demonstrate how I've applied these technologies in various projects.
           </p>
         </motion.div>
 
