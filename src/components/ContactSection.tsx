@@ -3,207 +3,265 @@ import {
   staggerContainerInView,
   staggerChildFadeUp,
 } from '../lib/animations'
-import { Mail, Github, Linkedin, Send, ArrowUpRight } from 'lucide-react'
+import { Mail, Github, Linkedin, ArrowUpRight, Sparkles } from 'lucide-react'
 
 /**
- * ContactSection — CTA Layout + Simple Contact Form
+ * ContactSection — Mobile-first CTA with animated contact channels
  *
- * Left: Strategic CTA with contact links (email, GitHub, LinkedIn)
- * Right: Compact contact form (name, email, message)
- * Animation: staggered entrance, hover effects on links
+ * Centered layout with staggered card reveals, spring hover effects,
+ * and a glowing CTA email button.
  */
 
-const contactLinks = [
+const contactChannels = [
   {
     label: 'Email',
     value: 'courtezj23@gmail.com',
     href: 'mailto:courtezj23@gmail.com',
-    icon: <Mail className="w-5 h-5" />,
+    icon: <Mail className="w-6 h-6" />,
+    description: 'Best way to reach me directly',
+    color: 'emerald',
   },
   {
     label: 'GitHub',
-    value: 'tcj9',
-    href: 'https://github.com/tcj9',
-    icon: <Github className="w-5 h-5" />,
+    value: 'courtez23',
+    href: 'https://github.com/courtez23',
+    icon: <Github className="w-6 h-6" />,
+    description: 'Explore my code and contributions',
+    color: 'cyan',
   },
   {
     label: 'LinkedIn',
     value: 'courtezjones',
     href: 'https://www.linkedin.com/in/courtezjones',
-    icon: <Linkedin className="w-5 h-5" />,
+    icon: <Linkedin className="w-6 h-6" />,
+    description: 'Let\'s connect professionally',
+    color: 'blue',
   },
 ]
 
+const channelColors: Record<string, { border: string; bg: string; glow: string; iconBg: string }> = {
+  emerald: {
+    border: 'hover:border-emerald-500/40',
+    bg: 'hover:bg-emerald-500/[0.04]',
+    glow: '0 0 40px rgba(34, 197, 94, 0.12)',
+    iconBg: 'bg-emerald-500/10 text-emerald-400',
+  },
+  cyan: {
+    border: 'hover:border-cyan-500/40',
+    bg: 'hover:bg-cyan-500/[0.04]',
+    glow: '0 0 40px rgba(6, 182, 212, 0.12)',
+    iconBg: 'bg-cyan-500/10 text-cyan-400',
+  },
+  blue: {
+    border: 'hover:border-blue-500/40',
+    bg: 'hover:bg-blue-500/[0.04]',
+    glow: '0 0 40px rgba(59, 130, 246, 0.12)',
+    iconBg: 'bg-blue-500/10 text-blue-400',
+  },
+}
+
+/** Container with heavier stagger for the channel cards */
+const channelStagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren' as const,
+      staggerChildren: 0.18,
+      delayChildren: 0.3,
+    },
+  },
+}
+
+/** Card entrance — slide up + scale + blur clear */
+const channelCardEntrance = {
+  hidden: { opacity: 0, y: 50, scale: 0.92, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      default: { type: 'spring' as const, visualDuration: 0.7, bounce: 0.2 },
+      opacity: { duration: 0.5, ease: 'easeOut' as const },
+      filter: { duration: 0.6, ease: 'easeOut' as const },
+    },
+  },
+}
+
+/** Decorative line draw animation */
+const lineReveal = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeOut' as const,
+      delay: 0.2,
+    },
+  },
+}
+
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background accent */}
+    <section id="contact" className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Layered background glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-500/[0.03] rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 sm:w-225 h-75 sm:h-112.5 bg-emerald-500/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-75 sm:w-100 h-75 sm:h-100 bg-cyan-500/2 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-62.5 sm:w-87.5 h-62.5 sm:h-87.5 bg-blue-500/2 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              Get In Touch
-            </span>
-          </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Open to impactful engineering opportunities, leadership roles,
-            and system design challenges.
-          </p>
-        </motion.div>
-
-        {/* Two-Column Layout */}
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: true, margin: '-40px' }}
           variants={staggerContainerInView}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16"
+          className="mb-10 sm:mb-14 md:mb-16 text-center"
         >
-          {/* Left — CTA + Links */}
-          <motion.div variants={staggerChildFadeUp} className="space-y-8">
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-slate-100">
-                Let's build something that lasts.
-              </h3>
-              <p className="text-slate-400 leading-relaxed">
-                Whether it's a senior engineering role, a systems architecture
-                conversation, or a collaboration on infrastructure that
-                matters—I'd like to hear from you.
-              </p>
-            </div>
-
-            {/* Contact Links */}
-            <div className="space-y-3">
-              {contactLinks.map((link) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={
-                    link.href.startsWith('http')
-                      ? 'noopener noreferrer'
-                      : undefined
-                  }
-                  variants={staggerChildFadeUp}
-                  whileHover={{
-                    x: 4,
-                    backgroundColor: 'rgba(34, 197, 94, 0.05)',
-                  }}
-                  transition={{
-                    type: 'spring',
-                    visualDuration: 0.3,
-                    bounce: 0.2,
-                  }}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-slate-700/50 bg-slate-800/20 hover:border-emerald-500/30 transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-slate-700/50 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500/10 transition-colors">
-                    {link.icon}
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-xs text-slate-500 uppercase tracking-wider font-medium">
-                      {link.label}
-                    </span>
-                    <p className="text-slate-200 font-medium">{link.value}</p>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition-colors" />
-                </motion.a>
-              ))}
-            </div>
+          <motion.div
+            variants={staggerChildFadeUp}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/6 mb-5 sm:mb-6"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="text-xs font-medium text-emerald-400 tracking-wider uppercase">
+              Open to Opportunities
+            </span>
           </motion.div>
 
-          {/* Right — Contact Form */}
-          <motion.div variants={staggerChildFadeUp}>
-            <form
-              action="https://formspree.io/f/placeholder"
-              method="POST"
-              className="space-y-5 p-6 md:p-8 rounded-xl border border-slate-700/50 bg-slate-800/20 backdrop-blur-sm"
-            >
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-name"
-                  className="text-sm font-medium text-slate-300"
-                >
-                  Name
-                </label>
-                <input
-                  id="contact-name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Your name"
-                  className="w-full px-4 py-3 rounded-lg bg-slate-900/60 border border-slate-600/40 text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/40 transition-all text-sm"
-                />
-              </div>
+          <motion.h2
+            variants={staggerChildFadeUp}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
+          >
+            <span className="bg-linear-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              Let's Build Something
+            </span>
+            <br />
+            <span className="text-slate-100">That Lasts</span>
+          </motion.h2>
 
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-email"
-                  className="text-sm font-medium text-slate-300"
-                >
-                  Email
-                </label>
-                <input
-                  id="contact-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  className="w-full px-4 py-3 rounded-lg bg-slate-900/60 border border-slate-600/40 text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/40 transition-all text-sm"
-                />
-              </div>
+          {/* Decorative line */}
+          <motion.div
+            variants={lineReveal}
+            className="mx-auto mb-5 sm:mb-6 h-px w-24 sm:w-32 bg-linear-to-r from-transparent via-emerald-500/50 to-transparent origin-center"
+          />
 
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-message"
-                  className="text-sm font-medium text-slate-300"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  required
-                  rows={5}
-                  placeholder="Tell me about the opportunity or challenge..."
-                  className="w-full px-4 py-3 rounded-lg bg-slate-900/60 border border-slate-600/40 text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500/40 transition-all text-sm resize-none"
-                />
-              </div>
+          <motion.p
+            variants={staggerChildFadeUp}
+            className="text-base sm:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed px-2"
+          >
+            Open to engineering opportunities and system design challenges.
+          </motion.p>
+        </motion.div>
 
-              <motion.button
-                type="submit"
+        {/* Contact Channel Cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          variants={channelStagger}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-10 sm:mb-14"
+        >
+          {contactChannels.map((channel) => {
+            const colors = channelColors[channel.color]
+            return (
+              <motion.a
+                key={channel.label}
+                href={channel.href}
+                target={channel.href.startsWith('http') ? '_blank' : undefined}
+                rel={
+                  channel.href.startsWith('http')
+                    ? 'noopener noreferrer'
+                    : undefined
+                }
+                variants={channelCardEntrance}
                 whileHover={{
-                  scale: 1.02,
-                  boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
+                  y: -8,
+                  scale: 1.03,
+                  boxShadow: colors.glow,
                 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full py-3.5 px-6 rounded-lg bg-emerald-500 text-slate-900 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-emerald-400 transition-colors cursor-pointer"
+                whileTap={{ scale: 0.97 }}
+                transition={{
+                  type: 'spring',
+                  visualDuration: 0.3,
+                  bounce: 0.25,
+                }}
+                className={`group relative flex flex-col items-center text-center p-6 sm:p-7 md:p-8 rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur-sm ${colors.border} ${colors.bg} transition-colors cursor-pointer`}
               >
-                <Send className="w-4 h-4" />
-                Send Message
-              </motion.button>
-
-              <p className="text-xs text-slate-600 text-center">
-                Or email me directly at{' '}
-                <a
-                  href="mailto:courtezj23@gmail.com"
-                  className="text-emerald-500 hover:underline"
+                {/* Icon */}
+                <div
+                  className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl ${colors.iconBg} flex items-center justify-center mb-4 sm:mb-5 transition-transform group-hover:scale-110`}
                 >
-                  courtezj23@gmail.com
-                </a>
-              </p>
-            </form>
-          </motion.div>
+                  {channel.icon}
+                </div>
+
+                {/* Label */}
+                <span className="text-[11px] text-slate-500 uppercase tracking-widest font-medium mb-1.5">
+                  {channel.label}
+                </span>
+
+                {/* Value */}
+                <p className="text-sm sm:text-base text-slate-200 font-semibold mb-2 break-all sm:break-normal">
+                  {channel.value}
+                </p>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                  {channel.description}
+                </p>
+
+                {/* Arrow indicator */}
+                <div className="absolute top-4 right-4 sm:top-5 sm:right-5">
+                  <ArrowUpRight className="w-4 h-4 text-slate-600 group-hover:text-slate-300 transition-colors" />
+                </div>
+              </motion.a>
+            )
+          })}
+        </motion.div>
+
+        {/* CTA Email Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true }}
+          transition={{
+            default: { type: 'spring', visualDuration: 0.7, bounce: 0.15 },
+            opacity: { duration: 0.5, ease: 'easeOut' },
+            filter: { duration: 0.5, ease: 'easeOut' },
+            delay: 0.6,
+          }}
+          className="text-center"
+        >
+          <motion.a
+            href="mailto:courtezj23@gmail.com"
+            whileHover={{
+              scale: 1.04,
+              boxShadow: '0 0 50px rgba(34, 197, 94, 0.25), 0 0 100px rgba(34, 197, 94, 0.1)',
+            }}
+            whileTap={{ scale: 0.97 }}
+            transition={{
+              type: 'spring',
+              visualDuration: 0.3,
+              bounce: 0.3,
+            }}
+            className="inline-flex items-center gap-2.5 px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-emerald-500 text-slate-900 font-bold text-sm sm:text-base hover:bg-emerald-400 transition-colors cursor-pointer shadow-lg shadow-emerald-500/20"
+          >
+            <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+            Send Me an Email
+          </motion.a>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="mt-4 sm:mt-5 text-xs sm:text-sm text-slate-500"
+          >
+            courtezj23@gmail.com
+          </motion.p>
         </motion.div>
       </div>
     </section>
