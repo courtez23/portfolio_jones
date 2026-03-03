@@ -285,13 +285,21 @@ export default function HeroSection() {
           style={{ opacity: heroContentOpacity }}
         >
           {/* Phase 1: Name — immediate entrance with stagger */}
-          <h1 className="mb-4">
+          <h1 className="mb-4 flex gap-4 justify-center flex-wrap">
             <StaggeredText
-              text="Courtez Jones"
-              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight"
+              text="Courtez"
+              className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight"
               charDelay={0.045}
               startDelay={0.3}
             />
+            
+            <StaggeredText
+              text="Jones"
+              className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight"
+              charDelay={0.045}
+              startDelay={0.5}
+            />
+            
           </h1>
 
           {/* Phase 2: Role — scroll-triggered reveal */}
