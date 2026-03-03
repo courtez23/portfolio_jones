@@ -1,5 +1,5 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform, useSpring } from 'motion/react'
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import {
   aboutStaggerContainer,
   timelineCardEntrance,
@@ -7,13 +7,8 @@ import {
   timelineCardFromRight,
   timelineNodeEntrance,
   narrativeEntrance,
-} from '../lib/animations'
-import {
-  Code2,
-  Building2,
-  Shield,
-  Rocket,
-} from 'lucide-react'
+} from "../lib/animations";
+import { Code2, Building2, Shield, Rocket } from "lucide-react";
 
 /**
  * AboutSection — Journey Timeline
@@ -25,76 +20,82 @@ import {
  */
 
 interface TimelineMilestone {
-  year: string
-  title: string
-  description: string
-  icon: React.ReactNode
-  accent: string
+  year: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  accent: string;
 }
 
 const milestones: TimelineMilestone[] = [
   {
-    year: '2017–2019',
-    title: 'Foundation & Community',
+    year: "2017–2019",
+    title: "Foundation & Community",
     description:
-      'Started in a college-affiliated apprenticeship building full-stack applications for local organizations and introducing elementary students to programming. Real-world execution met community impact from day one.',
+      "Participated in a college-affiliated apprenticeship building full-stack applications for local organizations and introducing elementary students to programming. Real-world projects, real community impact.",
     icon: <Code2 className="w-4 h-4" />,
-    accent: 'from-emerald-400 to-cyan-400',
+    accent: "from-emerald-400 to-cyan-400",
   },
   {
-    year: '2019–2023',
-    title: 'Enterprise & Leadership',
+    year: "2019–2023",
+    title: "Enterprise & Leadership",
     description:
-      'Lead Software Engineer and government contractor supporting statewide enterprise applications. Led front-end initiatives, designed database schemas, built CI/CD pipelines, onboarded developers, and served as the escalation point for production incidents across systems over a decade old.',
+      "Lead Software Engineer and government contractor supporting statewide enterprise applications. Led front-end initiatives, designed database schemas, built CI/CD pipelines, onboarded developers, and served as the escalation point for production incidents across systems over a decade old.",
     icon: <Building2 className="w-4 h-4" />,
-    accent: 'from-cyan-400 to-blue-500',
+    accent: "from-emerald-400 to-cyan-400",
   },
   {
-    year: '2024–2025',
-    title: 'Infrastructure Security',
+    year: "2024–2025",
+    title: "Infrastructure Security",
     description:
-      'Rebuilt the internal infrastructure for a medium-sized company after they experienced a ransomware incident. Modernized server environments, improved operational reliability, and strengthened security posture.',
+      "Rebuilt the internal infrastructure for a medium-sized company after they experienced a ransomware incident. Modernized server environments, improved operational reliability, and strengthened security posture.",
     icon: <Shield className="w-4 h-4" />,
-    accent: 'from-blue-500 to-violet-500',
+    accent: "from-emerald-400 to-cyan-400",
   },
   {
-    year: '2025–Present',
-    title: 'Building What Lasts',
+    year: "2025–Present",
+    title: "Building What Lasts",
     description:
-      'Channeling eight years of enterprise depth, security literacy, and systems thinking into architecture that endures. Building scalable platforms and pursuing tools that strengthen communities.',
+      "Channeling eight years of enterprise depth, security literacy, and systems thinking into architecture that endures. Building scalable platforms and pursuing tools that strengthen communities.",
     icon: <Rocket className="w-4 h-4" />,
-    accent: 'from-violet-500 to-emerald-400',
+    accent: "from-emerald-400 to-cyan-400",
   },
-]
+];
 
 /* ———————————————————————————————————————
    TimelineDot — minimal marker on the rail
    with icon inside
    ——————————————————————————————————————— */
-function TimelineDot({ icon, index }: { icon: React.ReactNode; index: number }) {
+function TimelineDot({
+  icon,
+  index,
+}: {
+  icon: React.ReactNode;
+  index: number;
+}) {
   return (
     <motion.div
       variants={timelineNodeEntrance}
-      className="relative z-10 w-7 h-7 md:w-8 md:h-8 rounded-full bg-linear-to-br from-emerald-400 to-cyan-400 shadow-sm shadow-emerald-400/40 shrink-0 flex items-center justify-center text-slate-900 font-semibold"
+      className="relative z-10 w-7 h-7 md:w-10 md:h-10 rounded-full bg-linear-to-br from-primary to-accent shadow-sm shadow-primary/40 shrink-0 flex items-center justify-center font-semibold"
     >
       {icon}
-      
+
       {/* Subtle pulse */}
       <motion.div
-        className="absolute inset-0 rounded-full bg-emerald-400/40"
+        className="absolute inset-0 rounded-full bg-primary/40"
         animate={{
-          scale: [1, 2.2, 2.2],
-          opacity: [0.6, 0, 0],
+          scale: [1.1, 1.4, 1.1],
+          opacity: [0, 0.7, 0],
         }}
         transition={{
           duration: 3,
           repeat: Infinity,
           delay: index * 0.8,
-          ease: 'easeOut',
+          ease: "easeOut",
         }}
       />
     </motion.div>
-  )
+  );
 }
 
 /* ———————————————————————————————————————
@@ -106,21 +107,21 @@ function TimelineCard({
   milestone,
   index,
 }: {
-  milestone: TimelineMilestone
-  index: number
+  milestone: TimelineMilestone;
+  index: number;
 }) {
-  const isEven = index % 2 === 0
+  const isEven = index % 2 === 0;
 
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: true, margin: "-60px" }}
       variants={aboutStaggerContainer}
       className={`
         relative flex items-center gap-5
         md:gap-0
-        ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}
+        ${isEven ? "md:flex-row" : "md:flex-row-reverse"}
       `}
     >
       {/* ── Mobile card (always right of rail) ── */}
@@ -136,10 +137,13 @@ function TimelineCard({
         variants={isEven ? timelineCardFromLeft : timelineCardFromRight}
         className={`
           hidden md:block md:flex-1 md:min-w-0
-          ${isEven ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}
+          ${isEven ? "md:pr-30 md:text-right" : "md:pl-30 md:text-left"}
         `}
       >
-        <MilestoneContent milestone={milestone} align={isEven ? 'right' : 'left'} />
+        <MilestoneContent
+          milestone={milestone}
+          align={isEven ? "right" : "left"}
+        />
       </motion.div>
 
       {/* ── Rail dot with icon ── */}
@@ -148,7 +152,7 @@ function TimelineCard({
       {/* ── Desktop opposite-side spacer ── */}
       <div className="hidden md:block md:flex-1" />
     </motion.div>
-  )
+  );
 }
 
 /* ———————————————————————————————————————
@@ -159,42 +163,31 @@ function MilestoneContent({
   milestone,
   align,
 }: {
-  milestone: TimelineMilestone
-  align: 'left' | 'right'
+  milestone: TimelineMilestone;
+  align: "left" | "right";
 }) {
   return (
     <div
       className={`
         group relative rounded-xl p-5 md:p-6
-        bg-slate-800/40 backdrop-blur-md
-        border border-slate-700/50
-        hover:border-emerald-500/30 hover:bg-slate-800/60
+        bg-card/70 backdrop-blur-md
+        border border-primary/30 hover:bg-primary/10
         transition-colors duration-300
-        ${align === 'right' ? 'md:ml-auto' : ''}
+        shadow-xl
+        ${align === "right" ? "md:ml-auto" : ""}
       `}
     >
-      {/* Gradient accent bar */}
-      <div
-        className={`
-          absolute top-0 h-px w-2/3 bg-linear-to-r ${milestone.accent} opacity-50
-          group-hover:opacity-100 transition-opacity duration-300
-          ${align === 'right' ? 'right-0 rounded-tr-xl' : 'left-0 rounded-tl-xl'}
-        `}
-      />
-
       <span
         className={`inline-block text-xs md:text-sm font-mono font-semibold tracking-wider bg-linear-to-r ${milestone.accent} bg-clip-text text-transparent mb-2`}
       >
         {milestone.year}
       </span>
-      <h3 className="text-lg md:text-xl font-bold text-slate-100 mb-2">
-        {milestone.title}
-      </h3>
-      <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+      <h3 className="text-lg md:text-xl font-bold mb-2">{milestone.title}</h3>
+      <p className="text-card-foreground leading-relaxed text-sm md:text-base">
         {milestone.description}
       </p>
     </div>
-  )
+  );
 }
 
 /* ———————————————————————————————————————
@@ -202,19 +195,23 @@ function MilestoneContent({
    Fills as the user scrolls through the
    timeline section
    ——————————————————————————————————————— */
-function ScrollProgressLine({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
+function ScrollProgressLine({
+  containerRef,
+}: {
+  containerRef: React.RefObject<HTMLDivElement | null>;
+}) {
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start center', 'end center'],
-  })
+    offset: ["start center", "end center"],
+  });
 
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 80,
     damping: 25,
     restDelta: 0.001,
-  })
+  });
 
-  const height = useTransform(smoothProgress, [0, 1], ['0%', '100%'])
+  const height = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <div
@@ -225,25 +222,25 @@ function ScrollProgressLine({ containerRef }: { containerRef: React.RefObject<HT
       `}
     >
       {/* Background rail */}
-      <div className="absolute inset-0 bg-slate-700/30" />
+      <div className="absolute inset-0 bg-muted" />
 
       {/* Animated fill */}
       <motion.div
-        className="absolute top-0 left-0 w-full bg-linear-to-b from-emerald-400 via-cyan-400 to-violet-500 origin-top"
+        className="absolute top-0 left-0 w-full bg-linear-to-b from-accent via-cyan-400 to-primary origin-top"
         style={{ height }}
       />
 
       {/* Glow */}
       <motion.div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-0.75 bg-linear-to-b from-emerald-400/50 via-cyan-400/30 to-violet-500/50 blur-sm origin-top"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-0.75 bg-linear-to-b from-accent/50 via-cyan-400 to-primary blur-sm origin-top"
         style={{ height }}
       />
     </div>
-  )
+  );
 }
 
 export default function AboutSection() {
-  const timelineRef = useRef<HTMLDivElement>(null)
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   return (
     <section
@@ -253,7 +250,7 @@ export default function AboutSection() {
       {/* Background ambient glow */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         <motion.div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-125 h-125 md:w-200 md:h-200 bg-emerald-500/3 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-125 h-125 md:w-200 md:h-200 bg-primary/10 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.08, 1],
             opacity: [0.5, 0.8, 0.5],
@@ -261,7 +258,7 @@ export default function AboutSection() {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         />
       </div>
@@ -269,22 +266,22 @@ export default function AboutSection() {
       <div className="max-w-5xl mx-auto relative z-10">
         {/* ── Section Header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{
-            default: { type: 'spring', visualDuration: 0.8, bounce: 0.15 },
-            opacity: { duration: 0.6, ease: 'easeOut' },
-            filter: { duration: 0.6, ease: 'easeOut' },
+            default: { type: "spring", visualDuration: 0.8, bounce: 0.15 },
+            opacity: { duration: 0.6, ease: "easeOut" },
+            filter: { duration: 0.6, ease: "easeOut" },
           }}
           viewport={{ once: true }}
           className="mb-14 md:mb-20 text-center"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
-            <span className="bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary to-cyan-400 bg-clip-text text-transparent">
               The Journey
             </span>
           </h2>
-          <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             From disassembling Xbox CD drives out of curiosity to rebuilding
             statewide infrastructure. Every chapter built on the last.
           </p>
@@ -309,30 +306,29 @@ export default function AboutSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
+          viewport={{ once: true, margin: "-40px" }}
           variants={aboutStaggerContainer}
           className="mt-16 md:mt-24 max-w-3xl mx-auto text-center space-y-5 md:space-y-6"
         >
           <motion.h3
             variants={narrativeEntrance}
-            className="text-xl md:text-2xl font-bold text-slate-100"
+            className="text-xl md:text-2xl font-bold"
           >
             Outside of work
           </motion.h3>
           <motion.p
             variants={narrativeEntrance}
-            className="text-slate-400 leading-relaxed text-sm md:text-base"
+            className="leading-relaxed text-sm md:text-base"
           >
-            I'm a father, a fitness enthusiast, and someone who grew up
-            watching{' '}
-            <span className="text-blue-400 font-medium">Dragon Ball</span> and{' '}
-            <span className="text-orange-500 font-medium">Naruto</span>. I've
+            I'm a father, a fitness enthusiast, and someone who grew up watching{" "}
+            <span className="text-primary font-medium">Justice League</span> and{" "}
+            <span className="text-primary font-medium">Naruto</span>. I've
             always been drawn to stories about strategic thinking, relentless
             growth, and the will to protect what matters.
           </motion.p>
           <motion.p
             variants={narrativeEntrance}
-            className="text-slate-400 leading-relaxed text-sm md:text-base"
+            className="leading-relaxed text-sm md:text-base"
           >
             The same curiosity that had me fixing consoles at twelve still
             drives me today. I believe technology should strengthen communities,
@@ -341,5 +337,5 @@ export default function AboutSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

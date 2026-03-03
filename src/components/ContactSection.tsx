@@ -1,9 +1,6 @@
-import { motion } from 'motion/react'
-import {
-  staggerContainerInView,
-  staggerChildFadeUp,
-} from '../lib/animations'
-import { Mail, Github, Linkedin, ArrowUpRight, Sparkles } from 'lucide-react'
+import { motion } from "motion/react";
+import { staggerContainerInView, staggerChildFadeUp } from "../lib/animations";
+import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
 
 /**
  * ContactSection — Mobile-first CTA with animated contact channels
@@ -14,51 +11,54 @@ import { Mail, Github, Linkedin, ArrowUpRight, Sparkles } from 'lucide-react'
 
 const contactChannels = [
   {
-    label: 'Email',
-    value: 'courtezj23@gmail.com',
-    href: 'mailto:courtezj23@gmail.com',
+    label: "Email",
+    value: "courtezj23@gmail.com",
+    href: "mailto:courtezj23@gmail.com",
     icon: <Mail className="w-6 h-6" />,
-    description: 'Best way to reach me directly',
-    color: 'emerald',
+    description: "Best way to reach me directly",
+    color: "emerald",
   },
   {
-    label: 'GitHub',
-    value: 'tcj-23',
-    href: 'https://github.com/tcj-23',
+    label: "GitHub",
+    value: "tcj-23",
+    href: "https://github.com/tcj-23",
     icon: <Github className="w-6 h-6" />,
-    description: 'Explore my code and contributions',
-    color: 'cyan',
+    description: "Explore my code and contributions",
+    color: "cyan",
   },
   {
-    label: 'LinkedIn',
-    value: 'courtezjones',
-    href: 'https://www.linkedin.com/in/courtezjones',
+    label: "LinkedIn",
+    value: "courtezjones",
+    href: "https://www.linkedin.com/in/courtezjones",
     icon: <Linkedin className="w-6 h-6" />,
-    description: 'Let\'s connect professionally',
-    color: 'blue',
+    description: "Let's connect professionally",
+    color: "blue",
   },
-]
+];
 
-const channelColors: Record<string, { border: string; bg: string; glow: string; iconBg: string }> = {
+const channelColors: Record<
+  string,
+  { border: string; bg: string; glow: string; iconBg: string }
+> = {
   emerald: {
-    border: 'hover:border-emerald-500/40',
-    bg: 'hover:bg-emerald-500/[0.04]',
-    glow: '0 0 40px rgba(34, 197, 94, 0.12)',
-    iconBg: 'bg-emerald-500/10 text-emerald-400',
+    border: "hover:border-emerald-500/40",
+    bg: "hover:bg-emerald-500/[0.04]",
+    glow: "0 0 40px rgba(34, 197, 94, 0.12)",
+    iconBg: "bg-emerald-500/10 text-emerald-400",
   },
   cyan: {
-    border: 'hover:border-cyan-500/40',
-    bg: 'hover:bg-cyan-500/[0.04]',
-    glow: '0 0 40px rgba(6, 182, 212, 0.12)',
-    iconBg: 'bg-cyan-500/10 text-cyan-400',
+    border: "hover:border-cyan-500/40",
+    bg: "hover:bg-cyan-500/[0.04]",
+    glow: "0 0 40px rgba(6, 182, 212, 0.12)",
+    iconBg: "bg-cyan-500/10 text-cyan-400",
   },
   blue: {
-    border: 'hover:border-blue-500/40',
-    bg: 'hover:bg-blue-500/[0.04]',
-    glow: '0 0 40px rgba(59, 130, 246, 0.12)',
-    iconBg: 'bg-blue-500/10 text-blue-400',
+    border: "hover:border-blue-500/40",
+    bg: "hover:bg-blue-500/[0.04]",
+    glow: "0 0 40px rgba(59, 130, 246, 0.12)",
+    iconBg: "bg-blue-500/10 text-blue-400",
   },
-}
+};
 
 /** Container with heavier stagger for the channel cards */
 const channelStagger = {
@@ -66,28 +66,28 @@ const channelStagger = {
   visible: {
     opacity: 1,
     transition: {
-      when: 'beforeChildren' as const,
+      when: "beforeChildren" as const,
       staggerChildren: 0.18,
       delayChildren: 0.3,
     },
   },
-}
+};
 
 /** Card entrance — slide up + scale + blur clear */
 const channelCardEntrance = {
-  hidden: { opacity: 0, y: 50, scale: 0.92, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 50, scale: 0.92, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: 'blur(0px)',
+    filter: "blur(0px)",
     transition: {
-      default: { type: 'spring' as const, visualDuration: 0.7, bounce: 0.2 },
-      opacity: { duration: 0.5, ease: 'easeOut' as const },
-      filter: { duration: 0.6, ease: 'easeOut' as const },
+      default: { type: "spring" as const, visualDuration: 0.7, bounce: 0.2 },
+      opacity: { duration: 0.5, ease: "easeOut" as const },
+      filter: { duration: 0.6, ease: "easeOut" as const },
     },
   },
-}
+};
 
 /** Decorative line draw animation */
 const lineReveal = {
@@ -97,15 +97,18 @@ const lineReveal = {
     opacity: 1,
     transition: {
       duration: 0.8,
-      ease: 'easeOut' as const,
+      ease: "easeOut" as const,
       delay: 0.2,
     },
   },
-}
+};
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
       {/* Layered background glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 sm:w-225 h-75 sm:h-112.5 bg-emerald-500/3 rounded-full blur-3xl" />
@@ -118,29 +121,19 @@ export default function ContactSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
+          viewport={{ once: true, margin: "-40px" }}
           variants={staggerContainerInView}
           className="mb-10 sm:mb-14 md:mb-16 text-center"
         >
-          <motion.div
-            variants={staggerChildFadeUp}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/6 mb-5 sm:mb-6"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="text-xs font-medium text-emerald-400 tracking-wider uppercase">
-              Open to Opportunities
-            </span>
-          </motion.div>
-
           <motion.h2
             variants={staggerChildFadeUp}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
           >
             <span className="bg-linear-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Let's Build Something
+              Let's Work
             </span>
             <br />
-            <span className="text-slate-100">That Lasts</span>
+            <span>Together</span>
           </motion.h2>
 
           {/* Decorative line */}
@@ -151,7 +144,7 @@ export default function ContactSection() {
 
           <motion.p
             variants={staggerChildFadeUp}
-            className="text-base sm:text-lg text-slate-400 max-w-xl mx-auto leading-relaxed px-2"
+            className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed px-2"
           >
             Open to engineering opportunities and system design challenges.
           </motion.p>
@@ -161,20 +154,20 @@ export default function ContactSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
+          viewport={{ once: true, margin: "-40px" }}
           variants={channelStagger}
           className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-10 sm:mb-14"
         >
           {contactChannels.map((channel) => {
-            const colors = channelColors[channel.color]
+            const colors = channelColors[channel.color];
             return (
               <motion.a
                 key={channel.label}
                 href={channel.href}
-                target={channel.href.startsWith('http') ? '_blank' : undefined}
+                target={channel.href.startsWith("http") ? "_blank" : undefined}
                 rel={
-                  channel.href.startsWith('http')
-                    ? 'noopener noreferrer'
+                  channel.href.startsWith("http")
+                    ? "noopener noreferrer"
                     : undefined
                 }
                 variants={channelCardEntrance}
@@ -185,11 +178,11 @@ export default function ContactSection() {
                 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{
-                  type: 'spring',
+                  type: "spring",
                   visualDuration: 0.3,
                   bounce: 0.25,
                 }}
-                className={`group relative flex flex-col items-center text-center p-6 sm:p-7 md:p-8 rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur-sm ${colors.border} ${colors.bg} transition-colors cursor-pointer`}
+                className={`group relative flex flex-col items-center text-center p-6 sm:p-7 md:p-8 rounded-2xl border border-slate-700/50 bg-card backdrop-blur-sm ${colors.border} ${colors.bg} transition-colors cursor-pointer`}
               >
                 {/* Icon */}
                 <div
@@ -199,12 +192,12 @@ export default function ContactSection() {
                 </div>
 
                 {/* Label */}
-                <span className="text-[11px] text-slate-500 uppercase tracking-widest font-medium mb-1.5">
+                <span className="text-[11px] uppercase tracking-widest font-medium mb-1.5">
                   {channel.label}
                 </span>
 
                 {/* Value */}
-                <p className="text-sm sm:text-base text-slate-200 font-semibold mb-2 break-all sm:break-normal">
+                <p className="text-sm sm:text-base font-semibold mb-2 break-all sm:break-normal">
                   {channel.value}
                 </p>
 
@@ -215,22 +208,22 @@ export default function ContactSection() {
 
                 {/* Arrow indicator */}
                 <div className="absolute top-4 right-4 sm:top-5 sm:right-5">
-                  <ArrowUpRight className="w-4 h-4 text-slate-600 group-hover:text-slate-300 transition-colors" />
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-slate-300 transition-colors" />
                 </div>
               </motion.a>
-            )
+            );
           })}
         </motion.div>
 
         {/* CTA Email Button */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{
-            default: { type: 'spring', visualDuration: 0.7, bounce: 0.15 },
-            opacity: { duration: 0.5, ease: 'easeOut' },
-            filter: { duration: 0.5, ease: 'easeOut' },
+            default: { type: "spring", visualDuration: 0.7, bounce: 0.15 },
+            opacity: { duration: 0.5, ease: "easeOut" },
+            filter: { duration: 0.5, ease: "easeOut" },
             delay: 0.6,
           }}
           className="text-center"
@@ -239,11 +232,12 @@ export default function ContactSection() {
             href="mailto:courtezj23@gmail.com"
             whileHover={{
               scale: 1.04,
-              boxShadow: '0 0 50px rgba(34, 197, 94, 0.25), 0 0 100px rgba(34, 197, 94, 0.1)',
+              boxShadow:
+                "0 0 50px rgba(34, 197, 94, 0.25), 0 0 100px rgba(34, 197, 94, 0.1)",
             }}
             whileTap={{ scale: 0.97 }}
             transition={{
-              type: 'spring',
+              type: "spring",
               visualDuration: 0.3,
               bounce: 0.3,
             }}
@@ -265,5 +259,5 @@ export default function ContactSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

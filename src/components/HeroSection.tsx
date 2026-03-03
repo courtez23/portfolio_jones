@@ -20,7 +20,7 @@ import ParticleNetwork from "./ParticleNetwork";
  *
  * Background: ParticleNetwork (interconnected nodes + parallax drift)
  * Colors: Theme-variable driven (--hero-node, --hero-accent, --hero-glow)
-*/
+ */
 
 // ——————————————————————————————————————
 // Animated Text Components

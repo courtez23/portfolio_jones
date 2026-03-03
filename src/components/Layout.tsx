@@ -1,19 +1,17 @@
-import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
+import React from "react";
+import Navbar from "./Navbar";
+import ThemeToggle from "./ThemeToggle";
 
 interface LayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-1">
-        {children}
-      </main>
-      <Footer />
+      <Navbar />
+      <ThemeToggle />
+      <main className="flex-1">{children}</main>
     </div>
-  )
+  );
 }

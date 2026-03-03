@@ -1,10 +1,8 @@
-import { Link } from 'react-router'
-import { motion } from 'motion/react'
-import {
-  staggerContainerInView,
-  staggerChildFadeUp,
-} from '../lib/animations'
-import { ArrowRight, Zap, Cog, Gamepad2 } from 'lucide-react'
+import { Link } from "react-router";
+import { motion } from "motion/react";
+import { staggerContainerInView, staggerChildFadeUp } from "../lib/animations";
+import { ArrowRight, Zap, Cog, Gamepad2 } from "lucide-react";
+import { Badge } from "./ui/badge";
 
 /**
  * ProjectsSection — Featured Project Teasers
@@ -17,55 +15,55 @@ import { ArrowRight, Zap, Cog, Gamepad2 } from 'lucide-react'
  */
 
 interface ProjectTeaser {
-  id: string
-  title: string
-  subtitle: string
-  problem: string
-  techStack: string[]
-  icon: React.ReactNode
-  gradient: string
-  glowColor: string
-  isFlagship: boolean
+  id: string;
+  title: string;
+  subtitle: string;
+  problem: string;
+  techStack: string[];
+  icon: React.ReactNode;
+  gradient: string;
+  glowColor: string;
+  isFlagship: boolean;
 }
 
 const projects: ProjectTeaser[] = [
   {
-    id: 'one-drop-video',
-    title: 'One Drop Video',
-    subtitle: 'Distribution Engine',
+    id: "one-drop-video",
+    title: "One Drop Video",
+    subtitle: "Distribution Engine",
     problem:
-      'Creators need to distribute short-form video across multiple platforms without manual upload to each. Existing solutions are scheduler-first suites—One Drop is pure distribution.',
-    techStack: ['Next.js', 'Convex', 'Vercel', 'TypeScript', 'OAuth 2.0'],
+      "Creators need to distribute short-form video across multiple platforms without manual upload to each. Existing solutions are scheduler-first suites—One Drop is pure distribution.",
+    techStack: ["Next.js", "Convex", "Vercel", "TypeScript", "OAuth 2.0"],
     icon: <Zap className="w-8 h-8" />,
-    gradient: 'from-emerald-500 via-cyan-500 to-blue-600',
-    glowColor: 'rgba(34, 197, 94, 0.2)',
+    gradient: "from-emerald-500 via-cyan-500 to-blue-600",
+    glowColor: "rgba(34, 197, 94, 0.2)",
     isFlagship: true,
   },
   {
-    id: 'job-processing-framework',
-    title: 'Job Processing Framework',
-    subtitle: 'Resilient Task Engine',
+    id: "job-processing-framework",
+    title: "Job Processing Framework",
+    subtitle: "Resilient Task Engine",
     problem:
-      'One Drop exposed the need for a generalized, reusable task orchestration system with retry policies, circuit breakers, and failure classification—extracted as a standalone framework.',
-    techStack: ['TypeScript', 'Event-Driven', 'State Machine', 'Convex'],
+      "One Drop exposed the need for a generalized, reusable task orchestration system with retry policies, circuit breakers, and failure classification—extracted as a standalone framework.",
+    techStack: ["TypeScript", "Event-Driven", "State Machine", "Convex"],
     icon: <Cog className="w-8 h-8" />,
-    gradient: 'from-cyan-500 via-blue-500 to-violet-600',
-    glowColor: 'rgba(34, 211, 238, 0.2)',
-    isFlagship: true,
-  },
-  {
-    id: 'mini-games',
-    title: 'Mini Games',
-    subtitle: 'Animation Showcase',
-    problem:
-      '2+ player game container with modular, heavily animated games—Rock-Paper-Scissors, Heads or Tails, Tic-Tac-Toe—with session-based isolation and extensible architecture.',
-    techStack: ['React', 'Motion.js', 'TypeScript', 'GitHub Pages'],
-    icon: <Gamepad2 className="w-8 h-8" />,
-    gradient: 'from-violet-500 via-purple-500 to-rose-500',
-    glowColor: 'rgba(139, 92, 246, 0.2)',
+    gradient: "from-emerald-500 via-cyan-500 to-blue-600",
+    glowColor: "rgba(34, 197, 94, 0.2)",
     isFlagship: false,
   },
-]
+  {
+    id: "mini-games",
+    title: "Mini Games",
+    subtitle: "Animation Showcase",
+    problem:
+      "2+ player game container with modular, heavily animated games—Rock-Paper-Scissors, Heads or Tails, Tic-Tac-Toe—with session-based isolation and extensible architecture.",
+    techStack: ["React", "Motion.js", "TypeScript", "GitHub Pages"],
+    icon: <Gamepad2 className="w-8 h-8" />,
+    gradient: "from-emerald-500 via-cyan-500 to-blue-600",
+    glowColor: "rgba(34, 197, 94, 0.2)",
+    isFlagship: false,
+  },
+];
 
 function ProjectTeaserCard({ project }: { project: ProjectTeaser }) {
   return (
@@ -75,13 +73,13 @@ function ProjectTeaserCard({ project }: { project: ProjectTeaser }) {
         y: -8,
         boxShadow: `0 24px 64px ${project.glowColor}, 0 8px 32px rgba(0, 0, 0, 0.4)`,
       }}
-      transition={{ type: 'spring', visualDuration: 0.3, bounce: 0.15 }}
-      className="group relative rounded-xl border border-slate-700/50 bg-slate-800/20 backdrop-blur-sm overflow-hidden"
+      transition={{ type: "spring", visualDuration: 0.3, bounce: 0.15 }}
+      className="group relative rounded-xl border border-primary/40 bg-card backdrop-blur-sm overflow-hidden"
     >
       <Link to={`/projects/${project.id}`} className="block">
         {/* Placeholder Image — gradient + icon */}
         <div
-          className={`relative h-48 md:h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
+          className={`relative h-48 md:h-56 bg-linear-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
         >
           {/* Pattern overlay */}
           <div className="absolute inset-0 opacity-10">
@@ -91,7 +89,7 @@ function ProjectTeaserCard({ project }: { project: ProjectTeaser }) {
                 backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 1px, transparent 1px),
                   radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 1px, transparent 1px),
                   radial-gradient(circle at 40% 80%, rgba(255,255,255,0.06) 1px, transparent 1px)`,
-                backgroundSize: '60px 60px, 80px 80px, 100px 100px',
+                backgroundSize: "60px 60px, 80px 80px, 100px 100px",
               }}
             />
           </div>
@@ -105,16 +103,14 @@ function ProjectTeaserCard({ project }: { project: ProjectTeaser }) {
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
           >
             {project.icon}
           </motion.div>
 
           {/* Hover shimmer */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
-          />
+          <motion.div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
 
           {/* Flagship badge */}
           {project.isFlagship && (
@@ -130,28 +126,29 @@ function ProjectTeaserCard({ project }: { project: ProjectTeaser }) {
         <div className="p-6 space-y-4">
           {/* Title + Subtitle */}
           <div>
-            <h3 className="text-xl font-bold text-slate-100 group-hover:text-emerald-400 transition-colors duration-300">
+            <h3 className="text-xl font-bold group-hover:text-emerald-400 transition-colors duration-300">
               {project.title}
             </h3>
-            <span className="text-sm text-slate-500 font-medium">
+            <span className="text-sm text-muted-foreground font-medium">
               {project.subtitle}
             </span>
           </div>
 
           {/* Problem Statement */}
-          <p className="text-sm text-slate-400 leading-relaxed line-clamp-3">
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
             {project.problem}
           </p>
 
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-1.5">
             {project.techStack.map((tech) => (
-              <span
+              <Badge
                 key={tech}
-                className="text-xs px-2.5 py-1 rounded-md bg-slate-700/50 text-slate-300 border border-slate-600/30"
+                variant="secondary"
+                className="text-xs px-2.5 py-1 rounded-md"
               >
                 {tech}
-              </span>
+              </Badge>
             ))}
           </div>
 
@@ -165,16 +162,19 @@ function ProjectTeaserCard({ project }: { project: ProjectTeaser }) {
         </div>
       </Link>
     </motion.div>
-  )
+  );
 }
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section
+      id="projects"
+      className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+    >
       {/* Background accent */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-emerald-500/[0.02] rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/[0.02] rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-0 w-125 h-125 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-125 h-125 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -192,8 +192,9 @@ export default function ProjectsSection() {
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Each project is a case study in solving real problems—architecture decisions,
-            tradeoffs, and the reasoning behind every technical choice.
+            Each project is a case study in solving real problems—architecture
+            decisions, tradeoffs, and the reasoning behind every technical
+            choice.
           </p>
         </motion.div>
 
@@ -201,7 +202,7 @@ export default function ProjectsSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: true, margin: "-60px" }}
           variants={{
             ...staggerContainerInView,
             visible: {
@@ -220,5 +221,5 @@ export default function ProjectsSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

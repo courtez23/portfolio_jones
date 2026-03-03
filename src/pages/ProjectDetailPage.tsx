@@ -1,13 +1,13 @@
-import { useParams, useNavigate } from 'react-router'
+import { useParams, useNavigate } from "react-router";
 
 export default function ProjectDetailPage() {
-  const { id } = useParams()
-  const navigate = useNavigate()
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
-      <button 
-        onClick={() => navigate('/')}
+      <button
+        onClick={() => navigate("/")}
         className="text-cyan-400 hover:text-cyan-300 mb-8 flex items-center gap-2"
       >
         <span>←</span> Back to Home
@@ -15,9 +15,7 @@ export default function ProjectDetailPage() {
 
       <div className="space-y-8">
         <header>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Project: {id}
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Project: {id}</h1>
           <p className="text-slate-400">Case study page coming soon</p>
         </header>
 
@@ -34,5 +32,5 @@ export default function ProjectDetailPage() {
         </section>
       </div>
     </div>
-  )
+  );
 }
