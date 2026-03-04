@@ -18,7 +18,6 @@ export default function ProjectTeaserCard({
 }: {
   project: ProjectTeaser;
 }) {
-
   return (
     <motion.div
       variants={staggerChildFadeUp}

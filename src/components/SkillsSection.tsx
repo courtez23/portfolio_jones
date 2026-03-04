@@ -130,7 +130,8 @@ const skillCategories: SkillCategory[] = [
   {
     title: "Testing",
     icon: <TestTube2 className="w-5 h-5" />,
-    accent: "from-chart-2 to-chart-2/40 dark:from-orange-700/80 dark:to-orange-200/80",
+    accent:
+      "from-chart-2 to-chart-2/40 dark:from-orange-700/80 dark:to-orange-200/80",
     glowColor: "rgba(139, 92, 246, 0.12)",
     skills: [
       {
@@ -356,8 +357,8 @@ export default function SkillsSection() {
           </h2>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed">
             An overview of my technical expertise. Each skill includes a
-            proficiency level and context to demonstrate how I've
-            applied these technologies.
+            proficiency level and context to demonstrate how I've applied these
+            technologies.
           </p>
         </motion.div>
 

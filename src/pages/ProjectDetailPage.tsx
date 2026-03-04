@@ -11,10 +11,7 @@ import {
   Shield,
   BookOpen,
 } from "lucide-react";
-import {
-  staggerContainerInView,
-  staggerChildFadeUp,
-} from "../lib/animations";
+import { staggerContainerInView, staggerChildFadeUp } from "../lib/animations";
 import { Badge } from "../components/ui/badge";
 import { getProjectById } from "../data/projects";
 import ProjectIcon from "../components/ProjectIcon";
@@ -93,7 +90,10 @@ export default function ProjectDetailPage() {
             y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 },
           }}
         >
-          <ProjectIcon name={project.iconName} className="w-10 h-10 md:w-14 md:h-14" />
+          <ProjectIcon
+            name={project.iconName}
+            className="w-10 h-10 md:w-14 md:h-14"
+          />
         </motion.div>
 
         {/* Flagship badge */}

@@ -32,7 +32,7 @@ export default function ProjectListPage() {
             <span className="header-text">All Projects</span>
           </h1>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed text-muted-foreground">
-            A collection of 
+            A collection of
           </p>
         </motion.div>
 
