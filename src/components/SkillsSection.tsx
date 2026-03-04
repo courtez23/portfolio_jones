@@ -339,8 +339,8 @@ export default function SkillsSection() {
     >
       {/* Background accent */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/[0.02] rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/[0.02] rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-150 h-150 bg-cyan-500/2 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-150 h-150 bg-violet-500/2 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
